@@ -9,9 +9,7 @@ public class Main {
             m+=60;
             h--;
         }
-        if(h<0){
-            h+=24;
-        }
-        System.out.println(h+" "+m);
+        if(h<0) h+=24;
+        System.out.println(h + " " + m);
     }
 }
