@@ -4,13 +4,13 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int h = sc.nextInt();
         int m = sc.nextInt();
-        int addm = sc.nextInt();
-        m+=addm;
+        int a = sc.nextInt();
+        m+=a;
         if(m>=60){
-            h+=m/60;
-            m%=60;
+            h += m/60;
+            m = m%60;
         }
-        if(h>=24) h%=24;
-        System.out.println(h+" "+m);
+        if(h>=24) h = h%24;
+        System.out.println(h + " " + m);
     }
 }
