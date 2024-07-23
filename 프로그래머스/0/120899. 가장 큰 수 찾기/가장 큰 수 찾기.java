@@ -6,7 +6,6 @@ class Solution {
                 max = array[i];
                 max_idx = i;
             }
-        int[] answer = {max, max_idx};
-        return answer;
+        return new int[]{max, max_idx};
     }
 }
