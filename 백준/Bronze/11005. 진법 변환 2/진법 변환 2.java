@@ -20,7 +20,6 @@ public class Main {
                 answer+=tmp+"";
             }
         }
-        StringBuilder result = new StringBuilder(answer);
-        System.out.println(result.reverse());
+        System.out.println(new StringBuilder(answer).reverse());
     }
 }
