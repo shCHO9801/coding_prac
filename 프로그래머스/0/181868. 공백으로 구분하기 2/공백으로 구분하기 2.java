@@ -1,9 +1,13 @@
 import java.util.*;
 class Solution {
     public String[] solution(String my_string) {
-        List<String> list = new ArrayList<>();
-        for(String s : my_string.split(" "))
-            if(!s.equals("")) list.add(s);
-        return list.toArray(new String[0]);
+        String[] answer;
+        StringTokenizer st = new StringTokenizer(my_string," ");
+        int n = st.countTokens();
+        answer = new String[n];
+        for(int i = 0; i < n; i++){
+            answer[i] = st.nextToken();
+        }
+        return answer;
     }
 }
