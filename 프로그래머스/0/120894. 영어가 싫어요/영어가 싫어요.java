@@ -4,11 +4,13 @@ class Solution {
         String answer = "";
         String tmp = "";
         String[] dic = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-        for(int i = 0;i<numbers.length();i++){
-            tmp += String.valueOf(numbers.charAt(i));
+        for(int i = 0;i < numbers.length();i++){
+            char x = numbers.charAt(i);
+            tmp += String.valueOf(x);
             if(tmp!=""){
-                if(Arrays.asList(dic).indexOf(tmp)!=-1){
-                    answer+=Arrays.asList(dic).indexOf(tmp);
+                int val = Arrays.asList(dic).indexOf(tmp);
+                if(val != -1){
+                    answer += String.valueOf(val);
                     tmp = "";
                 }
             }
