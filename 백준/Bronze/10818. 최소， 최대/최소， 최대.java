@@ -1,21 +1,22 @@
 import java.util.*;
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int max_v = 0, min_v = 0;
-        for(int i = 0;i<n;i++){
-            int x = sc.nextInt();
-            if(i==0){
-                max_v = x;
-                min_v = x;
-                continue;
-            }
-            if(max_v < x)
-                max_v = x;
-            if(min_v > x)
-                min_v = x;
+import java.io.*;
+import java.nio.*;
+public class Main{
+    static StringTokenizer st;
+    static int N;
+    static int max = Integer.MIN_VALUE;
+    static int min = Integer.MAX_VALUE;
+    static ArrayList<Integer> arr = new ArrayList<>();
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
+        for(int i = 0; i < N; i++){
+            arr.add(Integer.parseInt(st.nextToken()));
+            max = Math.max(max, arr.get(i));
+            min = Math.min(min, arr.get(i));
         }
-        System.out.println(min_v + " " + max_v);
+        System.out.println(min + " " + max);
+
     }
 }
