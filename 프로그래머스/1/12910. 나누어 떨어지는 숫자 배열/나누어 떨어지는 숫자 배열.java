@@ -1,12 +1,14 @@
 import java.util.*;
 class Solution {
     public int[] solution(int[] arr, int divisor) {
-        List<Integer> list = new ArrayList<>();
+        ArrayList<Integer> answer = new ArrayList<>();
         for(int i : arr){
-            if(i%divisor==0)
-                list.add(i);
+            if(i % divisor == 0){
+                answer.add(i);
+            }
         }
-        Collections.sort(list);
-        return list.size()==0?new int[]{-1}:list.stream().mapToInt(i->i).toArray();
+        Collections.sort(answer);
+        
+        return answer.size() == 0 ? new int[]{-1} : answer.stream().mapToInt(i -> i).toArray();
     }
 }
