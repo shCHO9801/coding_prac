@@ -1,13 +1,9 @@
-import java.util.*;
+import java.util.stream.*;
 
 public class Solution {
     public int solution(int n) {
-        int answer = 0;
-        while(n!=0){
-            answer+=n%10;
-            n/=10;
-        }
-
-        return answer;
+        return IntStream.iterate(n, i -> i > 0, i -> i/10)
+            .map(i -> i % 10)
+            .sum();
     }
 }
