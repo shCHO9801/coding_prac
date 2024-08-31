@@ -1,15 +1,11 @@
 class Solution {
     boolean solution(String s) {
-        int p = 0; int y = 0;
-        s = s.toLowerCase();
-        for(int i = 0; i < s.length(); i++){
-            char tmp = s.charAt(i);
-            if(tmp == 'p') p++;
-            else if(tmp == 'y') y++;
-        }
-        
-        if(p==0&&y==0) return true;
-        if(p==y) return true;
-        return false;
+        long countP = s.chars()
+            .filter(ch -> ch == 'p' || ch == 'P')
+            .count();
+        long countY = s.chars()
+            .filter(ch -> ch == 'y' || ch == 'Y')
+            .count();
+        return countP == countY;
     }
 }
