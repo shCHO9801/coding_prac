@@ -1,18 +1,13 @@
-import java.util.*;
+import java.util.stream.Collectors;
 class Solution {
     public long solution(long n) {
-        List<Character> tmp = new ArrayList<>();
-        String s = String.valueOf(n);
-        for(int i = 0; i< s.length();i++){
-            tmp.add(s.charAt(i));
-        }
-        Collections.sort(tmp, (x,y)->{
-            return y-x;
-        });
-        s = "";
-        for(Character i : tmp){
-            s+=String.valueOf(i);
-        }
-        return Long.parseLong(s);
+        return Long.parseLong(
+            String.valueOf(n)
+            .chars()
+            .mapToObj(i -> (char) i)
+            .sorted((x, y) -> y - x)
+            .map(String::valueOf)
+            .collect(Collectors.joining())
+        );
     }
 }
