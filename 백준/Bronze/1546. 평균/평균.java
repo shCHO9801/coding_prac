@@ -1,18 +1,22 @@
 import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = -1;
-        int[] score = new int[n];
-        for(int i=0;i<n;i++) {
-            score[i] = sc.nextInt();
-            if(m<score[i]) m = score[i];
+        int N = sc.nextInt();
+        int M = Integer.MIN_VALUE;
+        int[] arr = new int[N];
+        float average = 0;
+
+        for (int i = 0; i < N; i++) {
+            arr[i] = sc.nextInt();
+            M = Math.max(M, arr[i]);
         }
-        double answer = 0;
-        for(int v : score){
-            answer+=(double)v/m*100;
+
+        for(int i : arr){
+            average += (float) i / M * 100;
         }
-        System.out.println(answer/n);
+
+        System.out.println(average / N);
     }
 }
