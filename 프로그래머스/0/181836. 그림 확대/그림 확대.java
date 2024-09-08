@@ -1,22 +1,24 @@
-import java.util.*;
 class Solution {
     public String[] solution(String[] picture, int k) {
-        List<String> list = new ArrayList<>();
-        String[] answer;
-        for(String i : picture){
-            String tmp = "";
-            for(int j = 0;j<i.length();j++){
-                char x = i.charAt(j);
-                for(int l=0;l<k;l++)
-                    tmp+=String.valueOf(x);
+        String[] answer = new String[picture.length * k];
+        
+        int idx = 0;
+        
+        for(String p : picture){
+            char[] tmp = p.toCharArray();
+            StringBuilder sb = new StringBuilder();
+            
+            for(char c : tmp){
+                for(int i = 0; i < k; i++){
+                    sb.append(c);
+                }
             }
-            for(int l = 0; l < k;l++)
-                list.add(tmp);
+            
+            for(int i = 0; i < k; i++){
+                answer[idx++] = sb.toString();
+            }
         }
-        answer = new String[list.size()];
-        for(int i = 0; i< list.size();i++){
-            answer[i] = list.get(i);
-        }
+        
         return answer;
     }
 }
