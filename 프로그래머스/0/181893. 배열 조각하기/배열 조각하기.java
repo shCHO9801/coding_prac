@@ -1,28 +1,36 @@
 import java.util.*;
 
 class Solution {
-    public int[] solution(int[] arr, int[] query) {
-        Deque<Integer> list = new ArrayDeque<>();
-        for (int i : arr) {
-            list.add(i);
+    static ArrayList<Integer> list = new ArrayList<>();
+    
+    public static void removeBack(int n){
+        int len = list.size() - n - 1;
+        while(len-- > 0){
+            list.remove(list.size() - 1);
         }
-        for (int i = 0; i < query.length; i++) {
-            int len = list.size();
-            int q = query[i];
-            if (i % 2 == 0) {
-                for (int j = 1; j < len - q; j++) {
-                    list.pollLast();
-                }
+    }
+    
+    public static void removeFront(int n){
+        while(n-- > 0){
+            list.remove(0);
+        }
+    }
+    
+    public int[] solution(int[] arr, int[] query) {
+        
+        
+        for(int n : arr){
+            list.add(n);
+        }
+        
+        for(int i = 0; i < query.length; i++){
+            if(i % 2 == 0){
+                removeBack(query[i]);
             } else {
-                for (int j = 0; j < q; j++) {
-                    list.pollFirst();
-                }
+                removeFront(query[i]);
             }
         }
-        int[] answer = new int[list.size()];
-        for (int i = 0; i < answer.length; i++) {
-            answer[i] = list.pollFirst();
-        }
-        return answer;
+        
+        return list.stream().mapToInt(x -> x).toArray();
     }
 }
