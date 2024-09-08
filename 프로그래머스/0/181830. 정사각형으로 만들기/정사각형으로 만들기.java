@@ -8,13 +8,12 @@ class Solution {
         
         int[][] answer = new int[max][max];
         
-        for(int i = 0; i < max; i++){
-            for(int j = 0; j < max; j++){
-                if(i < arr.length && j < arr[0].length){
-                    answer[i][j] = arr[i][j];
-                }
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr[i].length; j++){
+                answer[i][j] = arr[i][j];
             }
         }
+        
         return answer;
     }
 }
