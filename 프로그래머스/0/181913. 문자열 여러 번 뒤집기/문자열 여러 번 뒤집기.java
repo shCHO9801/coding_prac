@@ -1,20 +1,20 @@
 class Solution {
     public String solution(String my_string, int[][] queries) {
         String answer = "";
-        char[] tmp = my_string.toCharArray();
-        for(int[] p : queries){
-            int idx = 0;
-            int s = p[0];
-            int e = p[1];
-            char[] reverse = new char[e-s+1];
-            for(int i = e;i>=s;i--){
-                reverse[idx++] = tmp[i];
-            }
-            idx = 0;
-            for(int i = s;i<=e;i++){
-                tmp[i] = reverse[idx++];
+        char[] cArr = my_string.toCharArray();
+        
+        for(int[] q : queries){
+            int x = q[0];
+            int y = q[1];
+            while(x < y){
+                char tmp = cArr[x];
+                cArr[x] = cArr[y];
+                cArr[y] = tmp;
+                x++;
+                y--;
             }
         }
-        return String.valueOf(tmp);
+        answer = String.valueOf(cArr);
+        return answer;
     }
 }
