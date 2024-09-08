@@ -1,14 +1,20 @@
 import java.util.*;
-class Student{
+class Student implements Comparable <Student> {
     int idx;
     int rank;
+    
     public Student(int idx, int rank){
         this.idx = idx;
         this.rank = rank;
     }
-}
-class Solution {
     
+    @Override
+    public int compareTo(Student o){
+        return this.rank - o.rank;
+    }
+}
+
+class Solution {
     public int solution(int[] rank, boolean[] attendance) {
         int answer = 0;
         List<Student> list = new ArrayList<>();
@@ -19,15 +25,9 @@ class Solution {
             }
         }
         
-        Collections.sort(list, (x, y) -> x.rank - y.rank);
+        Collections.sort(list);
         
-        int mul = 10000;
-        
-        for(int i = 0; i < 3; i++){
-            answer += mul * list.get(i).idx;
-            mul /= 100;
-        }
-        
+        answer = 10000 * list.get(0).idx + 100 * list.get(1).idx + 1 * list.get(2).idx;
         
         return answer;
     }
