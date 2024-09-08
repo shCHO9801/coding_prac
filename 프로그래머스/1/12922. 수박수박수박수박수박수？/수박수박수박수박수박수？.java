@@ -1,8 +1,11 @@
 class Solution {
     public String solution(int n) {
-        String answer = "";
-        for(int i = 0; i<n/2+1;i++)
-            answer+="수박";
-        return answer.substring(0,n);
+        StringBuilder sb = new StringBuilder();
+        char[] subak = {'수','박'};
+        
+        for(int i = 0; i < n; i++){
+            sb.append(subak[i % 2]);
+        }
+        return sb.toString();
     }
 }
