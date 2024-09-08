@@ -1,11 +1,17 @@
 class Solution {
     public String solution(String phone_number) {
-        String answer = "";
-        for(int i = 0; i<phone_number.length()-4;i++){
-            answer+="*";
+        StringBuilder sb = new StringBuilder();
+        int n = phone_number.length();
+        
+        for(int i = 0; i < n; i++){
+            if(i < n - 4){
+                sb.append('*');
+            } else{
+                sb.append(phone_number.charAt(i));
+            }
         }
-        for(int i = phone_number.length()-4;i<phone_number.length();i++)
-            answer+=String.valueOf(phone_number.charAt(i));
-        return answer;
+        
+        
+        return sb.toString();
     }
 }
