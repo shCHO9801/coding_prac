@@ -1,21 +1,9 @@
 import java.util.*;
 
 class Solution {
-    public static int[] makeDice(int a, int b, int c, int d){
-        int[] dd = new int[4];
-        
-        dd[0] = a;
-        dd[1] = b;
-        dd[2] = c;
-        dd[3] = d;
-        
-        Arrays.sort(dd);
-        
-        return dd;
-    }
     public int solution(int a, int b, int c, int d) {
-        int answer = 0;
-        int[] dd = makeDice(a, b, c, d);
+        int[] dd = { a, b, c, d };
+        Arrays.sort(dd);
         
         if(dd[0] == dd[3]){
             return 1111 * dd[3];
