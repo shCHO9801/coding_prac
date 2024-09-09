@@ -1,18 +1,17 @@
 class Solution {
     public int solution(String[][] board, int h, int w) {
-        int n = board.length;
-        int count = 0;
-        int[] dh = {0, 1, -1, 0};
-        int[] dw = {1, 0, 0, -1};
-        for(int i = 0; i <= 3; i++){
-            int h_check = h + dh[i];
-            int w_check = w + dw[i];
-            if(0 <= h_check && h_check < n && 0 <= w_check && w_check < n){
-                if (board[h][w].equals(board[h_check][w_check])){
-                    count++;
+        int answer = 0;
+        int[][] dir = {{0,1},{1,0},{0,-1},{-1,0}};
+        
+        for(int[] d : dir){
+            int x = d[0] + h;
+            int y = d[1] + w;
+            if(0 <= x && x < board.length && 0 <= y && y < board[0].length){
+                if(board[x][y].equals(board[h][w])){
+                    answer++;
                 }
             }
         }
-        return count;
+        return answer;
     }
 }
