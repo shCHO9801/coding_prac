@@ -1,19 +1,31 @@
 class Solution {
-    public int solution(int n) {
-        int answer = 0;
-        int mul = 1;
+    public static String reverse(String s){
+        StringBuilder sb = new StringBuilder();
+        for(int i = s.length() - 1; i >= 0; i--){
+            sb.append(s.charAt(i));
+        }
+        return sb.toString();
+    }
+    
+    public static int makeBin(int n){
+        StringBuilder sb = new StringBuilder();
+        int result = 0;
         
-        String binary3 = "";
         while(n != 0){
-            binary3 += String.valueOf(n%3);
-            n/=3;
+            sb.append(String.valueOf(n%3));
+            n /= 3;
         }
         
-        for(int i = binary3.length()-1; i >= 0; i--){
-            answer += mul * Integer.parseInt(String.valueOf(binary3.charAt(i)));
+        int mul = 1;
+        String tmp = reverse(sb.toString());
+        for(char c : tmp.toCharArray()){
+            result += (c - '0') * mul;
             mul *= 3;
         }
-        
-        return answer;
+        return result;
+    }
+    
+    public int solution(int n) {
+        return makeBin(n);
     }
 }
