@@ -1,18 +1,15 @@
 import java.util.*;
 class Solution {
     public String solution(String s) {
-        List <Character> list = new ArrayList<>();
-        for(int i = 0; i < s.length();i++){
-            list.add(s.charAt(i));
-        }
-        Collections.sort(list, (x,y)->{
-            return y-x;
-        });
-        String answer = "";
-        for(char i : list){
-            answer += String.valueOf(i);
+        StringBuilder sb = new StringBuilder();
+        
+        char[] cArr = s.toCharArray();
+        Arrays.sort(cArr);
+        
+        for(int i = cArr.length - 1; i >= 0 ;i--){
+            sb.append(cArr[i]);
         }
         
-        return answer;
+        return sb.toString();
     }
 }
