@@ -1,40 +1,46 @@
 import java.util.*;
+class Info implements Comparable<Info> {
+    int stage;
+    Double score;
+    
+    public Info(int stage, double score){
+        this.stage = stage;
+        this.score = score;
+    }
+    
+    @Override
+    public int compareTo(Info o){
+        int result = o.score.compareTo(this.score);
+        if(result == 0){
+            return this.stage - o.stage;
+        }
+        return result;
+    }
+}
+
 class Solution {
     public int[] solution(int N, int[] stages) {
         int[] answer = new int[N];
-        int[] count = new int[N + 2];
-        int player = stages.length;
+        int[] clear = new int[N + 2];
+        ArrayList<Info> list = new ArrayList<>();
+        int totalPeople = stages.length;
         
-        for(int s : stages){
-            count[s]++;
+        for(int stage : stages){
+            clear[stage]++;
         }
-        
-        double[][] fail = new double[N][2];
         
         for(int i = 1; i <= N; i++){
-            if(player == 0){
-                fail[i - 1][0] = i;
-                fail[i - 1][1] = 0.0;
-            }
-            else{
-                double tmp = (double) count[i] / player;
-                fail[i - 1][0] = i;
-                fail[i - 1][1] = tmp;
-                player -= count[i];
-            }
+            double score = clear[i] == 0 ? 0 : (double) clear[i] / totalPeople;
+            list.add(new Info(i, score));
+            totalPeople -= clear[i];
         }
         
-        Arrays.sort(fail, (a, b) -> {
-            if(a[1] == b[1]){
-                return Double.compare(a[0], b[0]);
-            }
-            else{
-                return Double.compare(b[1], a[1]);
-            }
-        });
+        Collections.sort(list);
         
-        for(int i = 0; i < N; i++){
-            answer[i] = (int)fail[i][0];
+        int idx = 0;
+        
+        for(Info i : list){
+            answer[idx++] = i.stage;
         }
         return answer;
     }
