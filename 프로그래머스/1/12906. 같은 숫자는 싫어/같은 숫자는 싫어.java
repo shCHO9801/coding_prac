@@ -2,24 +2,24 @@ import java.util.*;
 
 public class Solution {
     public int[] solution(int []arr) {
-        Stack<Integer> stack = new Stack<>();
-            for(int x : arr){
-                if(stack.isEmpty()){
-                    stack.push(x);
-                }
-                else if(stack.peek() == x){
-                    continue;
-                }
-                else{
-                    stack.push(x);
-                }
-            }
+        Stack<Integer> st = new Stack<>();
         
-        int[] answer = new int[stack.size()];
-        for(int i = stack.size() - 1; i >= 0; i--){
-            answer[i] = stack.pop();
+        st.add(arr[0]);
+        for(int i = 1; i < arr.length; i++){
+            if(st.peek() == arr[i]){
+                continue;
+            }
+            st.add(arr[i]);
         }
         
+        int[] answer = new int[st.size()];
+        int idx = 0;
+        
+        for(int i : st){
+            answer[idx++] = i;
+        }
+        
+
         return answer;
     }
 }
