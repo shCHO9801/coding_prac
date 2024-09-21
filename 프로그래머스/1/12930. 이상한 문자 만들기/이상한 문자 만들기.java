@@ -1,23 +1,19 @@
 class Solution {
     public String solution(String s) {
-        String answer = "";
-        s = s.toLowerCase();
-        int idx = 0;
-        for(int i = 0; i<s.length();i++){
-            char tmp = s.charAt(i);
-            if(tmp == ' '){
-                answer+=String.valueOf(tmp);
-                idx = 0;
+        StringBuilder answer = new StringBuilder();
+        int index = 0;
+        for(char c : s.toCharArray()){
+            if(c == ' '){
+                index = 0;
+                answer.append(c);
                 continue;
+            } else if (index % 2 == 0){
+                answer.append(Character.toUpperCase(c));
+            } else {
+                answer.append(Character.toLowerCase(c));
             }
-            else if(idx % 2 == 0){
-                answer += String.valueOf((char)(tmp - 'a' + 'A'));
-            }
-            else{
-                answer += String.valueOf(tmp);
-            }
-            idx++;
+            index++;
         }
-        return answer;
+        return answer.toString();
     }
 }
