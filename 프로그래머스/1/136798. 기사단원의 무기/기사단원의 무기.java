@@ -1,28 +1,31 @@
 import java.util.*;
+
 class Solution {
-    static int findNum(int n){
-        if(n == 1)
-            return 1;
-        
+    
+    public static int getDivisorCount(int n){
         int result = 0;
         
         for(int i = 1; i * i <= n; i++){
             if(i * i == n) result++;
-            else if(n % i == 0){
-                result+=2;
-            }
+            else if (n % i == 0) result += 2;
         }
+        
         return result;
     }
+    
     public int solution(int number, int limit, int power) {
-        ArrayList <Integer>weapon = new ArrayList<>();
-        for(int i = 1; i <= number; i++){
-            int count = findNum(i);
-            if(count > limit){
-                count = power;
+        int answer = 0;
+        
+        for(int num = 1; num <= number; num++){
+            int divisor = getDivisorCount(num);
+            
+            if(divisor > limit){
+                divisor = power;
             }
-            weapon.add(count);
+            
+            answer += divisor;
         }
-        return weapon.stream().mapToInt(i -> i).sum();
+        
+        return answer;
     }
 }
