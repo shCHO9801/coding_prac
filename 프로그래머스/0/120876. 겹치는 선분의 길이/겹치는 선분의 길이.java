@@ -1,18 +1,22 @@
 class Solution {
     public int solution(int[][] lines) {
         int answer = 0;
-        int[] count = new int[202];
-        int min = 201;
-        int max = -1;
+        int[] arr = new int[202];
+        int minVal = Integer.MAX_VALUE;
+        int maxVal = Integer.MIN_VALUE;
+        
         for(int[] l : lines){
-            for(int i = l[0]; i < l[1]; i++){
-                count[i + 100]++;
-                min = Math.min(min, i + 100);
-                max = Math.max(max, i + 100);
+            int s = l[0] + 100;
+            int e = l[1] + 100;
+            minVal = Math.min(minVal, s);
+            maxVal = Math.max(maxVal, e);
+            for(int i = s; i < e; i++){
+                arr[i]++;
             }
         }
-        for(int i = min; i <= max; i++){
-            if(count[i] >= 2){
+        
+        for(int i = minVal; i <= maxVal; i++){
+            if(arr[i] > 1){
                 answer++;
             }
         }
