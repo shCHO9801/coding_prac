@@ -1,26 +1,30 @@
 import java.util.*;
+
 class Solution {
-    static String[] alph = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
     public int solution(String s) {
-        String answer = "";
-        String tmp = "";
-        List <String> alpha = new ArrayList<>();
-        for(String i : alph) alpha.add(i);
-        for(int i = 0; i < s.length(); i++){
-            char c = s.charAt(i);
-            if(Character.isDigit(c)){
-                tmp = "";
-                answer+=String.valueOf(c);
-            }
-            else{
-                tmp+=String.valueOf(c);
-                int a_idx = alpha.indexOf(tmp);
-                if(a_idx != -1){
-                    answer+=String.valueOf(a_idx);
-                    tmp = "";
-                }
-            }
+        int answer = 0;
+        StringBuilder sb = new StringBuilder();
+        String[] nums = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+        
+        Map <String, Integer> map = new HashMap<>();
+        
+        for(int i = 0; i < nums.length; i++){
+            map.put(nums[i], i);
         }
-        return Integer.parseInt(answer);
+        
+        for(char c : s.toCharArray()){
+            if (Character.isDigit(c)){
+                answer = answer * 10 + Integer.parseInt(String.valueOf(c));
+            } else {
+                sb.append(c);    
+            }
+            
+            if(sb.length() != 0 && map.containsKey(sb.toString())){
+                answer = answer * 10 + map.get(sb.toString());
+                sb = new StringBuilder();
+            }
+            
+        }
+        return answer;
     }
 }
