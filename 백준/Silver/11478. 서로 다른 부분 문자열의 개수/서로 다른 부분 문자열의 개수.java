@@ -6,7 +6,6 @@ class Main{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String s = br.readLine();
         Set <String> set = new HashSet<>();
-        int answer = 0;
 
         for (int i = 0; i < s.length(); i++) {
             for (int j = i + 1; j <= s.length(); j++) {
