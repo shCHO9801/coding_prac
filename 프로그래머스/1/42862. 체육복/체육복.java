@@ -1,45 +1,27 @@
 import java.util.*;
 
 class Solution {
-    public static int[] setStudents(int n, int[] lost, int[] reserve){
-        int[] arr = new int[n + 2];
-        Arrays.fill(arr, 1);
-        arr[0] = 0;
-        arr[n + 1] = 0;
-        
-        for(int l : lost){
-            arr[l]--;
-        }
-        
-        for(int r : reserve){
-            arr[r]++;
-        }
-        
-        return arr;
-    }
-    
     public int solution(int n, int[] lost, int[] reserve) {
         int answer = 0;
-        int[] students = setStudents(n, lost, reserve);
+        int[] students = new int[n + 2];
+        
+        Arrays.fill(students, 1);
+        for(int i : lost) students[i]--;
+        for(int i : reserve) students[i]++;
         
         for(int i = 1; i <= n; i++){
             if(students[i] == 0){
-                if(students[i - 1] >= 2){
+                if(students[i - 1] > 1){
                     students[i - 1]--;
-                    students[i]++;
-                } else if(students[i + 1] >= 2){
+                    answer++;
+                } else if(students[i + 1] > 1){
                     students[i + 1]--;
-                    students[i]++;
+                    answer++;
                 }
-            }
-        }
-        
-        for(int i = 1; i <= n; i++){
-            if(students[i] >= 1){
+            } else {
                 answer++;
             }
         }
-        
         return answer;
     }
 }
