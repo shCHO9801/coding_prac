@@ -18,7 +18,7 @@ class Solution {
                 answer += nickname.charAt(i);
             }
         }
-        while( answer.length() < 4 ){
+        while(answer.length() < 4){
             answer += "o";
         }
         if(answer.length() > 8){
