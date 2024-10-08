@@ -1,32 +1,32 @@
 import java.util.*;
+
 class Solution {
     public int[] solution(String[] keymap, String[] targets) {
         int[] answer = new int[targets.length];
-        HashMap <String, Integer> map = new HashMap<>();
-        for(char i = 'A'; i <= 'Z'; i++){
-            map.put(String.valueOf(i),101);
-        }
-        
+        Map <String, Integer> map = new HashMap<>();
         
         for(String key : keymap){
-            int idx = 1;
-            for(String k : key.split("")){
-                int cur = map.get(k);
-                if(cur > idx){
-                    map.put(k, idx);
-                }
-                idx++;
+            for(int i = 0; i < key.length(); i++){
+                String tmp = String.valueOf(key.charAt(i));
+                int val = i + 1;
+                map.put(tmp, Math.min(map.getOrDefault(tmp, Integer.MAX_VALUE), val));
             }
         }
-        
-        for(int i = 0; i < targets.length; i++){
-            for(String key : targets[i].split("")){
-                if(map.get(key) == 101){
-                    answer[i] = -1;
+                        
+        for(int idx = 0; idx < targets.length; idx++){
+            String target = targets[idx];
+            int result = 0;
+            
+            for(String s : target.split("")){
+                int val = map.getOrDefault(s, -1);
+                if(val == -1){
+                    result = val;
                     break;
                 }
-                answer[i] += map.get(key);
+                
+                result += val;
             }
+            answer[idx] = result;
         }
         
         return answer;
