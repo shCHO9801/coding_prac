@@ -1,11 +1,12 @@
 class Solution {
-    static int[] months = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    static String[] days = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" };
     public String solution(int a, int b) {
+        int[] months = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        String[] days = { "THU", "FRI", "SAT", "SUN", "MON", "TUE", "WED" };
+        
         for(int i = 1; i < a; i++){
             b += months[i];
         }
-        b = (b + 4) % 7;
-        return days[b];
+        
+        return days[b % 7];
     }
 }
