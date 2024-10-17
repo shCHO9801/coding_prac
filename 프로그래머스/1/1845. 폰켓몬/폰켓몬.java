@@ -1,14 +1,15 @@
 import java.util.*;
+
 class Solution {
     public int solution(int[] nums) {
-        int select = nums.length / 2;
+        int answer = 0;
+        Set<Integer> set = new HashSet<>();
         
-        HashSet<Integer> set = new HashSet<>();
-        
-        for(int n : nums){
-            set.add(n);
+        for(int num : nums){
+            set.add(num);
         }
         
-        return set.size() > select ? select : set.size();
+        
+        return nums.length / 2 < set.size() ? nums.length / 2 : set.size();
     }
 }
