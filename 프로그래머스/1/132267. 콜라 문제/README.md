@@ -1,10 +1,10 @@
 # [level 1] 콜라 문제 - 132267 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/132267) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/132267?language=java) 
 
 ### 성능 요약
 
-메모리: 75.3 MB, 시간: 0.09 ms
+메모리: 80.4 MB, 시간: 0.07 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 08월 16일 04:08:07
+2024년 10월 17일 23:51:08
 
 ### 문제 설명
 
