@@ -1,17 +1,19 @@
 import java.util.*;
+
 class Solution {
     public int solution(int k, int m, int[] score) {
         int answer = 0;
-        ArrayList<Integer> list = new ArrayList<>();
-        for(int i : score){
-            list.add(i);
+        
+        if(score.length < m){
+            return answer;
         }
-        Collections.sort(list, (x,y) -> {
-            return y-x;
-        });
-        for(int i = m-1; i < score.length; i+=m){
-            answer += list.get(i) * m;
+        
+        Arrays.sort(score);
+        
+        for(int i = score.length - m; i >= 0; i -= m){
+            answer += score[i] * m;
         }
+        
         return answer;
     }
 }
