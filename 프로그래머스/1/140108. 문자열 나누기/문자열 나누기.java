@@ -1,32 +1,35 @@
+import java.util.*;
 class Solution {
     public int solution(String s) {
         int answer = 0;
-        int idx = 0;
-        int x, y;
-        char cur = 'c';
-        char find = 'c';
+        char[] cArr = s.toCharArray();
+        List <String> tmps = new ArrayList<>();
+        StringBuilder tmp = new StringBuilder();
         
-        while(idx < s.length()){
-            find = s.charAt(idx++);
-            x = 1;
-            y = 0;
-            while(idx < s.length() && x != y){
-                cur = s.charAt(idx++);
-                if(cur == find){
-                    x++;
-                }
-                else{
-                    y++;
-                }
+        char x = 'q';
+        int xCount = 0, nCount = 0;
+        
+        for(int i = 0; i < cArr.length; i++){
+            tmp.append(cArr[i]);
+            if(tmp.length() == 1){
+                x = cArr[i];    
             }
             
-            s = s.substring(idx,s.length());
-            idx = 0;
+            if(x == cArr[i]){
+                xCount++;
+            } else {
+                nCount++;
+            }
+            
+            if(xCount == nCount){
+                tmps.add(tmp.toString());
+                tmp = new StringBuilder();
+            }
+        }
+        
+        if(tmp.length() != 0){
             answer++;
         }
-        if(s.length() > 0){
-            answer++;
-        }
-        return answer;
+        return answer + tmps.size();
     }
 }
