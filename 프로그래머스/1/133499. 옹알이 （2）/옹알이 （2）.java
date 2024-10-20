@@ -1,28 +1,39 @@
 import java.util.*;
+
 class Solution {
-    static final String[] babb = {"aya", "ye", "woo", "ma"};
-    static boolean isBabb(String s){
-        int cur = -1;
-        String tmp = "";
-        for(String c : s.split("")){
-            tmp += c;
-            int idx = Arrays.asList(babb).indexOf(tmp);
-            if(idx != -1){
-                if(cur == idx){
+    static List<String> bab;
+    
+    public static void makeBab(){
+        String[] b = {"aya", "ye", "woo", "ma"};
+        bab = new ArrayList<>(Arrays.asList(b));
+    }
+    
+    public static boolean isBabbling(String s){
+        StringBuilder tmp = new StringBuilder();
+        String prev = "";
+        
+        for(char c : s.toCharArray()){
+            tmp.append(c);
+            
+            if(bab.contains(tmp.toString())){
+                if(prev.equals(tmp.toString())){
                     return false;
+                } else {
+                    prev = tmp.toString();
+                    tmp = new StringBuilder();
                 }
-                tmp = "";
-                cur = idx;
             }
         }
-        if(tmp == "")
-            return true;
-        return false;
+        
+        return tmp.length() == 0 ? true : false;
     }
+    
     public int solution(String[] babbling) {
         int answer = 0;
+        makeBab();
+        
         for(String s : babbling){
-            if(isBabb(s)){
+            if(isBabbling(s)){
                 answer++;
             }
         }
