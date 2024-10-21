@@ -1,24 +1,17 @@
 class Solution {
     public String solution(String s, String skip, int index) {
-        String answer = "";
-        for(char x : s.toCharArray()){
-            int plus = 0;
-            int val = x;
-            while(plus != index){
-                val++;
-                if(val > (int)'z'){
-                    val = val - 'z' + 'a' - 1;
-                }
-                while(skip.contains(String.valueOf((char)val))){
-                    val++;
-                    if(val > (int)'z'){
-                        val = val - 'z' + 'a' - 1;
-                    }
-                }
-                plus++;
+        StringBuilder answer = new StringBuilder();
+        
+        for(char c : s.toCharArray()){
+            for(int i = 0; i < index; i++){
+                do{
+                    c++;
+                    if(c > 'z') c = 'a';
+                } while(skip.contains(String.valueOf(c)));
             }
-            answer += (char)val;
+            answer.append(c);
         }
-        return answer;
+        
+        return answer.toString();
     }
 }
