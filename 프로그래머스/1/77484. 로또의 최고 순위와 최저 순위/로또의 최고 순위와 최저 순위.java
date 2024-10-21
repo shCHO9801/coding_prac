@@ -1,24 +1,25 @@
+import java.util.*;
+
 class Solution {
+    static int[] rank = {6, 6, 5, 4, 3, 2, 1};
+    
     public int[] solution(int[] lottos, int[] win_nums) {
-        int[] answer = new int[2];
-        int zero = 0;
-        int result = 0;
-        for(int i = 0; i < lottos.length; i++){
-            if(lottos[i] == 0){
-                zero++;
-                continue;
-            }
-            for(int win : win_nums){
-                if(win == lottos[i]){
-                    result++;
-                    break;
-                }
+        List<Integer> win = new ArrayList<>();
+        int count = 0;
+        int countZero = 0;
+        
+        for(int w : win_nums){
+            win.add(w);
+        }
+        
+        for(int i : lottos){
+            if(i == 0){
+                countZero++;
+            } else if (win.contains(i)){
+                count++;
             }
         }
-        zero += result;
-        System.out.print(zero + " " + result);
-        answer[0] = 7 - zero == 7 ? 6 : 7 - zero;
-        answer[1] = 7 - result == 7 ? 6 : 7 - result;
-        return answer;
+        
+        return new int[]{rank[count + countZero], rank[count]};
     }
 }
