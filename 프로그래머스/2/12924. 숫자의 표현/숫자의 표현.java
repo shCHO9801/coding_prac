@@ -1,22 +1,21 @@
 class Solution {
     public int solution(int n) {
-        if(n == 1) return 1;
         int answer = 0;
-        int left = 1, right = 2;
-        int sum = 3;
-        while(left <= right && left <= n){
+        long sum = 0;
+        
+        int l = 0, r = 0;
+        while(l != n || r != n){
             if(sum < n){
-                right++;
-                sum+=right;
-            }
-            else if(sum == n){
+                r++;
+                sum += r;
+            } else if (sum == n){
                 answer++;
-                sum-=left++;
+                l++;
+                sum -= l;
+            } else {
+                l++;
+                sum -= l;
             }
-            else if (sum > n){
-                sum-=left++;
-            }
-            
         }
         return answer;
     }
