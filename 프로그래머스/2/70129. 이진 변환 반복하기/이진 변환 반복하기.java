@@ -1,32 +1,21 @@
 class Solution {
-    static String makeBinary(int num){
-        String answer = "";
-        String tmp = "";
-        while(num != 1){
-            tmp += String.valueOf(num%2);
-            num/=2;
-        }
-        tmp+='1';
-        for(int i = tmp.length()-1; i >= 0; i--){
-            answer+=tmp.charAt(i);
-        }
-        
-        return answer;
-    }
     public int[] solution(String s) {
-        int[] answer = new int[2];
+        int conversion = 0;
+        int deleteZero = 0;
         
         while(!s.equals("1")){
-            int x = 0;
-            for(int i = 0; i < s.length(); i++){
-                if(s.charAt(i) == '1') x++;
+            int len = s.length();
+            conversion++;
+            for(char c : s.toCharArray()){
+                if(c == '0'){
+                    deleteZero++;
+                    len--;
+                }
             }
-            answer[0]++;
-            answer[1] += s.length()-x;
-            s = makeBinary(x);
+            s = Integer.toBinaryString(len);
         }
         
         
-        return answer;
+        return new int[]{conversion, deleteZero};
     }
 }
