@@ -1,20 +1,16 @@
 class Solution {
-    static int countOne (int n){
-        int answer = 0;
-        while(n!=0){
-            if(n%2==1)
-                answer++;
-            n/=2;
+    public static Integer getOneCount(Integer n){
+        int result = 0;
+        for(char c : Integer.toBinaryString(n).toCharArray()){
+            if(c == '1') result++;
         }
-        return answer;
+        return result;
     }
+    
     public int solution(int n) {
-        int answer = n+1;
-        int nCount = countOne(n);
-        int aCount = countOne(answer);
-        while(nCount != aCount){
-            aCount = countOne(++answer);
-        }
+        int answer = n;
+        int nOneCount = getOneCount(n);
+        while(nOneCount != getOneCount(++answer));
         return answer;
     }
 }
