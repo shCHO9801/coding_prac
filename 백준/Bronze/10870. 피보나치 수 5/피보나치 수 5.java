@@ -1,17 +1,19 @@
 import java.util.*;
-import java.io.*;
-public class Main{
-    public static int fibo(int n){
-        if(n==0) return 0;
-        if(n<3) return 1;
-        int[] arr = new int[n+1];
-        arr[1] = arr[2] = 1;
-        for (int i = 3; i <= n; i++) {
-            arr[i] = arr[i-1] + arr[i-2];
+
+public class Main {
+    static int[] memo = new int[21];
+    public static Integer fibo(Integer n) {
+        if(n == 0) return 0;
+        if(n == 1 || n == 2) {
+            return memo[n] = 1;
         }
-        return arr[n];
+        if(memo[n] != 0) {
+            return memo[n];
+        }
+
+        return memo[n] = fibo(n - 2) + fibo(n - 1);
     }
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         System.out.println(fibo(n));
