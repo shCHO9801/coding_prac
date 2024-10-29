@@ -1,20 +1,22 @@
 import sys
 
 def f(s):
-    count = 0
+    stack = []
     for i in s:
         if i == '(':
-            count+=1
+            stack.append(i)
         elif i == ')':
-            if count > 0:
-                count -= 1
-            else :
+            if not stack:
                 return False
+            if stack[-1] != '(':
+                return False
+            else:
+                stack.pop()
 
-    if count == 0:
-        return True
-    else :
+    if stack:
         return False
+    else :
+        return True
     
 
 n = int(sys.stdin.readline())
