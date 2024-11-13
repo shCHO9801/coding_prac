@@ -1,10 +1,11 @@
 import sys
+a, b, c = map(int, sys.stdin.readline().split())
 
-n = sorted(list(map(int, sys.stdin.readline().split())))
-
-if n[0] == n[1] == n[2]:
-    print(10000+1000*n[2])
-elif n[0] == n[1] or n[1] == n[2]:
-    print(1000 + n[1] * 100)
+if a==b==c:
+    print(10000+a*1000)
+elif a == b or b == c:
+    print(1000 + b *100)
+elif a==c:
+    print(1000 + a*100)
 else :
-    print(100 * n[2])
+    print(100 * max(a,b,c))
