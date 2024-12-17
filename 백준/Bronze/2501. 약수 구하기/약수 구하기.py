@@ -1,11 +1,11 @@
 import sys
 
-list_divisor = [0]
+list_divisor = []
 
-n, k = map(int, sys.stdin.readline().split())
+p, q = map(int, sys.stdin.readline().split())
 
-for i in range(1, n + 1):
-    if n % i == 0:
+for i in range(1, p+1):
+    if p % i == 0:
         list_divisor.append(i)
 
-print(list_divisor[k] if len(list_divisor) > k else 0)
+print(list_divisor[q-1] if len(list_divisor) >= q else 0)
