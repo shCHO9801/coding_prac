@@ -1,41 +1,45 @@
 import java.util.*;
-import java.nio.*;
 import java.io.*;
 
-public class Main{
+public class Main {
     static StringTokenizer st;
+    static private int parseInt(String s) {
+        return Integer.parseInt(s);
+    }
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder answer = new StringBuilder();
-        int answerCount = 0;
-        Map <String, Integer> map = new HashMap<>();
+        Set<String> A = new HashSet<>();
+        Set<String> B = new HashSet<>();
+
+        int count = 0;
+        List<String> list = new ArrayList<>();
 
         st = new StringTokenizer(br.readLine());
 
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+        int n = parseInt(st.nextToken());
+        int m = parseInt(st.nextToken());
 
-        for (int i = 0; i < n + m; i++) {
-            String x = br.readLine();
-            map.put(x, map.getOrDefault(x, 0) + 1);
+        while(n-- > 0) {
+            String name = br.readLine();
+            A.add(name);
         }
 
-        String[] key = new String[map.size()];
-
-        int idx = 0;
-        for(String k : map.keySet()){
-            key[idx++] = k;
-        }
-
-        Arrays.sort(key);
-        for(String k : key){
-            if(map.get(k) == 2){
-                answerCount++;
-                answer.append(k).append('\n');
+        while(m-- > 0) {
+            String name = br.readLine();
+            if(A.contains(name)) {
+                count++;
+                list.add(name);
             }
         }
+        
+        Collections.sort(list);
+        StringBuilder answer = new StringBuilder();
 
-        System.out.println(answerCount);
-        System.out.println(answer.toString());
+        answer.append(count).append("\n");
+        for(String name : list) {
+            answer.append(name).append("\n");
+        }
+
+        System.out.print(answer);
     }
 }
