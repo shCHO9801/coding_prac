@@ -1,9 +1,13 @@
+from collections import Counter
+
 def solution(participant, completion):
+    # dic = Counter(participant)
+    
     dic = {}
     for p in participant:
-        if(p not in dic.keys()):
+        if p not in dic:
             dic[p] = 1
-        else:
+        else :
             dic[p] += 1
         
     for c in completion:
