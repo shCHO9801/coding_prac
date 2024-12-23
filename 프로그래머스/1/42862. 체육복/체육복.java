@@ -1,27 +1,31 @@
 import java.util.*;
-
 class Solution {
     public int solution(int n, int[] lost, int[] reserve) {
-        int answer = 0;
-        int[] students = new int[n + 2];
+        int[] arr = new int[n + 2];
+        Arrays.fill(arr, 1);
         
-        Arrays.fill(students, 1);
-        for(int i : lost) students[i]--;
-        for(int i : reserve) students[i]++;
+        for(int l : lost) {
+            arr[l]--;
+        }
         
-        for(int i = 1; i <= n; i++){
-            if(students[i] == 0){
-                if(students[i - 1] > 1){
-                    students[i - 1]--;
-                    answer++;
-                } else if(students[i + 1] > 1){
-                    students[i + 1]--;
-                    answer++;
+        for(int r : reserve) {
+            arr[r]++;
+        }
+        
+        for(int i = 1; i <= n; i++) {
+            if(arr[i] == 0) {
+                if(arr[i - 1] == 2) {
+                    arr[i - 1]--;
+                    arr[i]++;
+                } else if (arr[i+1] == 2) {
+                    arr[i + 1]--;
+                    arr[i]++;
                 }
-            } else {
-                answer++;
             }
         }
-        return answer;
+        
+        return (int)Arrays.stream(arr, 1, n+1)
+            .filter(x -> x >= 1)
+            .count();
     }
 }
