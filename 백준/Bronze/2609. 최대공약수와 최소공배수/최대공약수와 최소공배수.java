@@ -1,28 +1,28 @@
 import java.util.*;
 import java.io.*;
 public class Main{
-    static StringTokenizer st;
-    static int a,b;
-    public static int getAnswer(){
-        int answer = 1;
-        int idx = 2;
-        while(Math.max(a,b)>=idx){
-            while(a%idx==0 && b%idx==0){
-                answer*=idx;
-                a/=idx;b/=idx;
-            }
-            idx++;
-        }
-        return answer;
-    }
-    public static void main(String[] args)throws IOException{
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        st = new StringTokenizer(br.readLine());
-        a = Integer.parseInt(st.nextToken());
-        b = Integer.parseInt(st.nextToken());
-        int answer1 = getAnswer();
-        System.out.println(answer1);
-        System.out.println(answer1*a*b);
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+        StringBuilder answer = new StringBuilder();
+
+        int gcd = gcd(a, b);
+        int lcm = gcd * (a / gcd) * (b / gcd);
+        answer.append(gcd).append('\n').append(lcm);
+        System.out.println(answer);
     }
 
+    private static int gcd(int a, int b) {
+        if(a < b) {
+            int tmp = a;
+            a = b;
+            b = tmp;
+        }
+        if(b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
 }
