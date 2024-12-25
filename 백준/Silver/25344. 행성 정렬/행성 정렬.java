@@ -15,7 +15,7 @@ public class Main {
         }
 
         long lcm = list.get(0);
-        
+
         for (int i = 1; i < list.size(); i++) {
             lcm = lcm(lcm, list.get(i));
         }
