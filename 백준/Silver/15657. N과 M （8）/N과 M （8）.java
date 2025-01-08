@@ -4,7 +4,6 @@ import java.util.*;
 public class Main {
     static StringTokenizer st;
     static int[] arr;
-    static boolean[] visited;
     static int n;
     static int m;
     static StringBuilder answer;
@@ -29,7 +28,6 @@ public class Main {
             return;
         }
         for (int i = 0; i < n; i++) {
-            if(visited[i]) continue;
             if(i < start) continue;
             tmp.add(arr[i]);
 
@@ -49,7 +47,6 @@ public class Main {
         m = Integer.parseInt(st.nextToken());
 
         arr = new int[n];
-        visited = new boolean[n];
         st = new StringTokenizer(br.readLine());
 
         for (int i = 0; i < n; i++) {
