@@ -1,55 +1,60 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     static StringTokenizer st;
+    static int[] arr;
+    static boolean[] visited;
+    static int n;
+    static int m;
+    static StringBuilder answer;
+    static List<Integer> tmp;
 
     public static void main(String[] args) throws IOException {
+        setUp();
+        backTracking(0, m, tmp, answer);
+
+        System.out.println(answer);
+    }
+
+    private static void backTracking(int start, int m, List<Integer> tmp, StringBuilder answer) {
+        if(m == tmp.size()) {
+            for(int i = 0; i < m; i++) {
+                answer.append(tmp.get(i));
+                if(i < m - 1) {
+                    answer.append(' ');
+                }
+            }
+            answer.append('\n');
+            return;
+        }
+        for (int i = 0; i < n; i++) {
+            if(visited[i]) continue;
+            if(i < start) continue;
+            tmp.add(arr[i]);
+
+            backTracking(i, m, tmp, answer);
+
+            tmp.remove(tmp.size() - 1);
+        }
+    }
+
+    private static void setUp() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        answer = new StringBuilder();
+        tmp = new ArrayList<>();
 
         st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int[] arr = new int[n];
-        boolean[] visited = new boolean[n];
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
 
+        arr = new int[n];
+        visited = new boolean[n];
         st = new StringTokenizer(br.readLine());
 
         for (int i = 0; i < n; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
-
         Arrays.sort(arr);
-
-        List<Integer> list = new ArrayList<>();
-        StringBuilder answer = new StringBuilder();
-        f(0, 0, m, arr, visited, list, answer);
-
-        System.out.println(answer);
-    }
-
-    private static void f(int depth, int start, int m, int[] arr, boolean[] visited, List<Integer> list, StringBuilder answer) {
-        if(depth == m) {
-            answer.append(getAnswer(list)).append('\n');
-            return;
-        }
-        for (int i = start; i < arr.length; i++) {
-            list.add(arr[i]);
-            f(depth + 1, i, m, arr, visited, list, answer);
-            list.remove(list.size() - 1);
-        }
-    }
-
-    private static StringBuilder getAnswer(List<Integer> list) {
-        StringBuilder result = new StringBuilder();
-        for(int i : list) {
-            result.append(i).append(' ');
-        }
-        return result;
     }
 }
