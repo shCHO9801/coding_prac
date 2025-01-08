@@ -1,34 +1,57 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
+    static StringTokenizer st;
+    static int[] arr;
+    static boolean[] visited;
+    static int n;
+    static int m;
+    static StringBuilder answer;
+    static List<Integer> tmp;
+
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        StringBuilder answer = new StringBuilder();
-
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-
-        StringBuilder sb = new StringBuilder();
-
-        f(0, n, m, answer, sb);
+        setUp();
+        backTracking(0, m, tmp, answer);
 
         System.out.println(answer);
     }
 
-    private static void f(int depth, int n, int m, StringBuilder answer, StringBuilder sb) {
-        if(depth == m) {
-            answer.append(sb).append('\n');
+    private static void backTracking(int start, int m, List<Integer> tmp, StringBuilder answer) {
+        if(m == tmp.size()) {
+            for(int i = 0; i < m; i++) {
+                answer.append(tmp.get(i));
+                if(i < m - 1) {
+                    answer.append(' ');
+                }
+            }
+            answer.append('\n');
             return;
         }
-        for(int i = 1; i <= n; i++) {
-            if(sb.length() != 0 && i < Integer.parseInt(sb.substring(sb.length()-2, sb.length()-1))) {
-                continue;
-            }
-            sb.append(i).append(' ');
-            f(depth + 1, n, m, answer, sb);
-            sb.delete(sb.length() - 2, sb.length());
+        for (int i = 0; i < n; i++) {
+            if(i < start) continue;
+            tmp.add(arr[i]);
+
+            backTracking(i, m, tmp, answer);
+
+            tmp.remove(tmp.size() - 1);
+        }
+    }
+
+    private static void setUp() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        answer = new StringBuilder();
+        tmp = new ArrayList<>();
+
+        st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+
+        arr = new int[n];
+        visited = new boolean[n];
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = i + 1;
         }
     }
 }
