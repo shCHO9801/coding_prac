@@ -2,51 +2,65 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
+    static StringTokenizer st;
+    static int[] arr;
+    static boolean[] visited;
+    static int n;
+    static int m;
+
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder answer = new StringBuilder();
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-
-        int[] arr = new int[n];
-        st = new StringTokenizer(br.readLine());
-        for(int i=0; i<n; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
-
-        Arrays.sort(arr);
-
-        boolean[] visited = new boolean[n];
         List<Integer> tmp = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
 
-        backTracking(n, m, arr, visited, tmp, sb);
+        setUp();
+        backTracking(m,  tmp, answer);
 
-        System.out.print(sb);
+        System.out.println(answer);
     }
 
-    private static void backTracking(int n, int m, int[] arr, boolean[] visited, List<Integer> tmp, StringBuilder sb) {
-        if(tmp.size() == m) {
-            for(int i=0; i<m; i++) {
-                sb.append(tmp.get(i)).append(' ');
+    private static void backTracking(int m, List<Integer> tmp, StringBuilder answer) {
+        if(m == tmp.size()) {
+            for (int i = 0; i < m; i++) {
+                answer.append(tmp.get((i)));
+                if(i < m - 1) {
+                    answer.append(' ');
+                }
             }
-            sb.setLength(sb.length() - 1); // 마지막 공백 제거
-            sb.append('\n');
+            answer.append('\n');
             return;
         }
-
-        for(int i=0; i<n; i++) {
-            if(visited[i]) continue;
-
-            if(i > 0 && arr[i] == arr[i-1] && !visited[i-1]) continue;
-
-            visited[i] = true;
+        for (int i = 0; i < n; i++) {
+            if(visited[i]) {
+                continue;
+            }
+            if(i > 0 && arr[i - 1] == arr[i] && !visited[i - 1]) {
+                continue;
+            }
             tmp.add(arr[i]);
-            backTracking(n, m, arr, visited, tmp, sb);
-            tmp.remove(tmp.size() - 1);
+            visited[i] = true;
+
+            backTracking(m, tmp, answer);
+
             visited[i] = false;
+            tmp.remove(tmp.size() - 1);
         }
     }
+
+    private static void setUp() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+
+        arr = new int[n];
+        visited = new boolean[n];
+
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < n; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        Arrays.sort(arr);
+    }
+
 }
