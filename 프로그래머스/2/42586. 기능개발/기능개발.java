@@ -1,43 +1,28 @@
 import java.util.*;
+
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
         int[] answer = {};
-        ArrayList <Integer> tmp = new ArrayList<>();
-        int idx = 0;
+        List<Integer> list = new ArrayList<>();
+        int day = 0;
+        int index = 0;
+        int len = progresses.length;
         
-        while(idx < progresses.length){
+        while(index < len) {
             int count = 0;
             
-            for(int i = idx; i < progresses.length; i++){
-                progresses[i] += speeds[i];
-                if(progresses[i] > 100){
-                    progresses[i] = 100;
-                }
+            while(progresses[index] + day * speeds[index] < 100) {
+                day++;
             }
             
-            
-            
-            if(progresses[idx] >= 100){
-                
-                for(int i = idx; i < progresses.length; i++){
-                    System.out.print(progresses[i] + " ");
-                }
-                System.out.println();
-                
-                for(int i = idx; i < progresses.length; i++){
-                    if(progresses[i] < 100){
-                        break;
-                    }
-                    idx++;
-                    count++;
-                    if(idx >= progresses.length){
-                        break;
-                    }
-                }
-                tmp.add(count);
+            while(index < len && progresses[index] + speeds[index] * day >= 100) {
+                count++;
+                index++;
             }
+            list.add(count);
         }
         
-        return tmp.stream().mapToInt(i -> i).toArray();
+        
+        return list.stream().mapToInt(i -> i).toArray();
     }
 }
