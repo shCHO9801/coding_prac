@@ -1,52 +1,66 @@
+import java.util.*;
+
 class Solution {
     public String solution(String new_id) {
-        String answer = "";
-        
-        new_id = new_id.toLowerCase();
         StringBuilder sb = new StringBuilder();
+        String contain = "-_.";
+        Deque<Character> dq = new ArrayDeque<>();
         
         for(char c : new_id.toCharArray()) {
-            if(Character.isDigit(c) || Character.isLowerCase(c) || c == '-' || c == '_' || c == '.') {
+            if(Character.isUpperCase(c)) {
+                c = Character.toLowerCase(c);
+            }
+            
+            if(Character.isLowerCase(c) || Character.isDigit(c) || contain.contains(String.valueOf(c))){
                 sb.append(c);
             }
         }
         
         new_id = sb.toString();
-        sb = new StringBuilder();
         
-        char cur = new_id.charAt(0);
-        for(int i = 1; i < new_id.length(); i++) {
-            if(cur == new_id.charAt(i) && cur == '.') {
-                continue;
-            } else {
-                sb.append(cur);
-                cur = new_id.charAt(i);
+        if(new_id.length() != 0) {
+            dq.addLast(new_id.charAt(0));
+        
+            for(int i = 1; i < new_id.length(); i++) {
+                char cur = new_id.charAt(i);
 
+                if(dq.peekLast() == '.' && cur == '.') {
+                    continue;
+                }
+
+                dq.addLast(cur);
             }
         }
         
-        sb.append(cur);
-        new_id = sb.toString();
-        if(new_id.length() > 0 && new_id.charAt(0) == '.') {
-            new_id = new_id.substring(1,new_id.length());
-        }
-        if(new_id.length() > 0 && new_id.charAt(new_id.length() - 1) == '.') {
-            new_id = new_id.substring(0, new_id.length() - 1);
+        while(!dq.isEmpty() && dq.peekFirst() == '.') {
+            dq.pollFirst();
         }
         
-        if(new_id.length() == 0) new_id += "a";
-        
-        if(new_id.length() >= 16) {
-            new_id = new_id.substring(0, 15);
-            if(new_id.length() > 0 && new_id.charAt(new_id.length() - 1)  == '.') {
-                new_id = new_id.substring(0, new_id.length() - 1);
-            }
+        while(!dq.isEmpty() && dq.peekLast() == '.') {
+            dq.pollLast();
         }
         
-        while(new_id.length() <= 2) {
-            new_id += String.valueOf(new_id.charAt(new_id.length() - 1));
+        if(dq.isEmpty()) {
+            dq.addLast('a');
         }
         
-        return new_id;
+        while(dq.size() >= 16) {
+            dq.pollLast();
+        }
+        
+        while(!dq.isEmpty() && dq.peekLast() == '.') {
+            dq.pollLast();
+        }
+        
+        while(dq.size() <= 2) {
+            dq.addLast(dq.peekLast());
+        }
+        
+        sb = new StringBuilder();
+        while(!dq.isEmpty()) {
+            sb.append(dq.pollFirst());
+        }
+        
+        return sb.toString();
     }
 }
