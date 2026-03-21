@@ -1,36 +1,41 @@
 import java.util.*;
 
 class Solution {
+    public class Info {
+        int time;
+        int weight;
+        
+        public Info (int time, int weight) {
+            this.time = time;
+            this.weight = weight;
+        }
+    }
+    
     public int solution(int bridge_length, int weight, int[] truck_weights) {
-        int answer = 0;
-        Queue<Integer> q = new LinkedList<>();
-        Queue<Integer> truck = new LinkedList<>();
+        int time = 0;
+        int idx = 0;
+        int total = 0;
         
-        for(int i = 0; i < bridge_length; i++){
-            q.add(0);
-        }
+        Queue<Info> q = new LinkedList<>();
         
-        for(int i : truck_weights){
-            truck.add(i);
-        }
-        
-        int bridge = 0;
-        
-        while(!q.isEmpty()){
-            answer++;
-            bridge -= q.poll();
+        while(true) {
+            if(q.isEmpty() && idx == truck_weights.length) break;
             
-            if(!truck.isEmpty()){
-                if(bridge + truck.peek() <= weight){
-                    int next = truck.poll();
-                    q.add(next);
-                    bridge += next;
-                } else {
-                    q.add(0);
-                }
+            time++;
+            
+            if(!q.isEmpty() && time - q.peek().time >= bridge_length) {
+                Info car = q.poll();
+                total -= car.weight;
+            }
+            
+            if (idx < truck_weights.length && truck_weights[idx] + total <= weight) {
+                Info car = new Info(time, truck_weights[idx]);  
+                idx++;
+                q.add(car);
+                total += car.weight;
             }
         }
         
-        return answer;
+        return time;
     }
 }
