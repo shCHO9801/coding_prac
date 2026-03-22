@@ -1,30 +1,26 @@
 class Solution {
     public String solution(String s) {
-        StringBuilder answer = new StringBuilder();
-        StringBuilder tmp = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         
-        for(char c : s.toCharArray()){
-            if(c == ' '){
-                if(tmp.length() > 0){
-                    answer.append(tmp);
-                    tmp = new StringBuilder();
-                }
-                answer.append(' ');
+        char[] arr = s.toCharArray();
+        boolean first = true;
+        
+        for(int i = 0; i < arr.length; i++) {
+            if(arr[i] == ' ') {
+                first = true;
+                sb.append(arr[i]);
+            } else if(Character.isDigit(arr[i])) {
+                first = false;
+                sb.append(arr[i]);
             } else {
-                if(Character.isDigit(c)){
-                    tmp.append(c);
-                } else if(tmp.length() == 0){
-                    tmp.append(Character.toUpperCase(c));
-                } else {
-                    tmp.append(Character.toLowerCase(c));
+                if(first) {
+                    sb.append(Character.toUpperCase(arr[i]));
+                    first = false;
                 }
+                else sb.append(Character.toLowerCase(arr[i]));
             }
         }
         
-        if(tmp.length() > 0){
-            answer.append(tmp);
-        }
-        
-        return answer.toString();
+        return sb.toString();
     }
 }
