@@ -1,47 +1,44 @@
-import java.util.*;
-
 class Solution {
     public int[] solution(String[][] places) {
-        int[] answer = new int[places.length];
+        int len = places.length;
+        int[] answer = new int[len];
         
-        
-        for(int i = 0; i < places.length; i++) {
-            answer[i] = func(places[i]) ? 1 : 0;
+        for(int i = 0; i < len; i++) {
+            answer[i] = function(places[i]) ? 1 : 0;
         }
         
         return answer;
     }
     
-    private boolean func(String[] place) {
+    private boolean function(String[] place) {
         
-        for(int x = 0; x < 5; x++) {
-            for(int y = 0; y < 5; y++) {
-                if(place[x].charAt(y) != 'P') continue;
+        for(int i = 0; i < place.length; i++) {
+            for(int j = 0; j < place[i].length(); j++) {
+                if(place[i].charAt(j) != 'P') continue;
                 
-                if(y + 1 < 5) {
-                    if(place[x].charAt(y + 1) == 'P') return false;
-                    if(y + 2 < 5 && place[x].charAt(y + 2) == 'P' && place[x].charAt(y + 1) != 'X')
-                        return false;
+                // 오른쪽
+                if(j + 1 < place[i].length() && place[i].charAt(j + 1) == 'P') return false;
+                if(j + 2 < place[i].length() && place[i].charAt(j + 2) == 'P') {
+                    if(place[i].charAt(j + 1) != 'X') return false;
                 }
                 
-                if(x + 1 < 5) {
-                    if(place[x + 1].charAt(y) == 'P') return false;
-                    if(x + 2 < 5 && place[x + 2].charAt(y) == 'P' && place[x + 1].charAt(y) != 'X')
-                        return false;
+                // 아래
+                if(i + 1 < place.length && place[i + 1].charAt(j) == 'P') return false;
+                if(i + 2 < place.length && place[i + 2].charAt(j) == 'P') {
+                    if(place[i + 1].charAt(j) != 'X') return false;
                 }
                 
-                if(x + 1 < 5 && y + 1 < 5 && place[x + 1].charAt(y + 1) == 'P') {
-                    if(place[x + 1].charAt(y) != 'X') return false;
-                    if(place[x].charAt(y + 1) != 'X') return false;
+                // 대각 오
+                if(i + 1 < place.length && j + 1 < place[i + 1].length() && place[i + 1].charAt(j + 1) == 'P') {
+                    if(place[i + 1].charAt(j) != 'X' || place[i].charAt(j + 1) != 'X') return false;
                 }
                 
-                if(x + 1 < 5 && 0 <= y - 1 && place[x + 1].charAt(y - 1) == 'P') {
-                    if(place[x + 1].charAt(y) != 'X') return false;
-                    if(place[x].charAt(y - 1) != 'X') return false;
+                if(i + 1 < place.length && 0 <= j - 1 && place[i + 1].charAt(j - 1) == 'P') {
+                    if(place[i + 1].charAt(j) != 'X' || place[i].charAt(j - 1) != 'X') return false;
                 }
-                
             }
         }
+        
         return true;
     }
 }
