@@ -1,4 +1,4 @@
-select animal_id, name
-from animal_ins
-where intake_condition <> 'aged'
-order by 1;
+SELECT animal_id, name
+FROM animal_ins
+WHERE intake_condition <> 'aged'
+ORDER By animal_id
