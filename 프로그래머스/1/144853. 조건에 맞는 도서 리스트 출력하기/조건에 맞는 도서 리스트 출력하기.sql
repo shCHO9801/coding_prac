@@ -1,4 +1,4 @@
-select book_id, substring(published_date, 1, 10) as published_date
-from book
-where year(published_date) = 2021 and category = '인문'
-order by published_date;
+SELECT BOOK_ID, substring(PUBLISHED_DATE, 1, 10) as PUBLISHED_DATE
+FROM BOOK
+WHERE YEAR(PUBLISHED_DATE) = 2021 and CATEGORY = '인문'
+ORDER BY PUBLISHED_DATE 
