@@ -1,4 +1,6 @@
-select dr_name, dr_id, mcdp_cd, substring(hire_ymd,1, 10) as hire_ymd
-from doctor
-where trim(mcdp_cd) in ('cs', 'gs')
-order by 4 desc, 1;
+SELECT
+    dr_name, dr_id, mcdp_cd, date_format(hire_ymd, '%Y-%m-%d') as hire_ymd
+FROM doctor
+WHERE mcdp_cd = 'CS' 
+    or mcdp_cd = 'GS'
+ORDER BY hire_ymd desc, dr_name asc;
