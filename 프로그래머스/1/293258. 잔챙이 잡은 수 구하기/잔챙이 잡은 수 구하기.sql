@@ -1,2 +1,3 @@
-select count(*) as fish_count
-from (select id from fish_info where length is null) as base
+SELECT count(*) as fish_count
+FROM fish_info
+WHERE length is null;
