@@ -1,13 +1,9 @@
-select id, email, first_name, last_name
-from developers
-where skill_code & (
-    select code
-    from skillcodes
-    where name = 'C#'
-)
-or skill_code & (
-    select code
-    from skillcodes
-    where name = 'Python'
-)
-order by id
+SELECT DISTINCT
+    d.id,
+    d.email,
+    d.first_name,
+    d.last_name
+FROM developers d
+JOIN skillcodes s ON s.name in ('Python', 'C#')
+WHERE d.skill_code & s.code = s.code
+ORDER BY d.id asc;
