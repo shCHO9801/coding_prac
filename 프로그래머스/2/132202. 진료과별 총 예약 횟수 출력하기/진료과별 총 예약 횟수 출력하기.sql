@@ -9,7 +9,7 @@ WITH base as (
 )
 
 SELECT 
-    mcdp_cd as '진료과코드',
-    count as '5월예약건수'
+    mcdp_cd as "진료과코드",
+    count as "5월예약건수"
 FROM base
 ORDER BY count asc, mcdp_cd asc
