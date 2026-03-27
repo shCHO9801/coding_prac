@@ -1,4 +1,4 @@
-select id, email, first_name, last_name
-from developer_infos
-where skill_1 = 'python' or skill_2 = 'python' or skill_3 = 'python'
-order by 1
+SELECT id, email, first_name, last_name
+FROM developer_infos
+WHERE 'Python' in (skill_1, skill_2, skill_3)
+ORDER BY id
