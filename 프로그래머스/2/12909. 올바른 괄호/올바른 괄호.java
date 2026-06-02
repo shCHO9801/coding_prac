@@ -1,17 +1,17 @@
 class Solution {
     boolean solution(String s) {
+        boolean answer = true;
+
         int count = 0;
-        for(String tmp : s.split("")){
-            if(tmp.equals("(")){
-                count++;
-            } else {
-                if(count <= 0){
-                    return false;
-                } else {
-                    count--;
-                }
+        
+        for(char c : s.toCharArray()) {
+            if(c == '(') count++;
+            else {
+                if(count == 0) return false;
+                count--;
             }
         }
-        return count == 0;
+
+        return count == 0 ? true : false;
     }
 }
